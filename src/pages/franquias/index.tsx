@@ -80,19 +80,20 @@ export default function UserList() {
                               {franchise.owner}
                             </Td>
                             <Td>
-                              <Button
-                                as="a"
-                                size="sm"
-                                fontSize="sm"
-                                colorScheme="yellow"
-                                onClick={() => alert('This action is not ready yet')}
-                                leftIcon={<Icon
-                                  as={RiPencilLine}
-                                  fontSize="16"
-                                />}
-                              >
-                                Acessar
+                              <Link href={`/franquias/details/${franchise.id}`} >
+                                <Button
+                                  as="a"
+                                  size="sm"
+                                  fontSize="sm"
+                                  colorScheme="yellow"
+                                  leftIcon={<Icon
+                                    as={RiPencilLine}
+                                    fontSize="16"
+                                  />}
+                                >
+                                  Acessar
                           </Button>
+                              </Link>
                             </Td>
                           </>
                         }
