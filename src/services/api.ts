@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: "http://localhost:3000/api"
+  baseURL: "https://60802726a5be5d00176dd379.mockapi.io/api/atw/"
 })
