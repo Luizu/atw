@@ -8,6 +8,7 @@ import { Header } from "../../../components/Header";
 import { Sidebar } from "../../../components/Sidebar";
 import { FiArrowLeft } from 'react-icons/fi'
 import { WorkingFranchise } from "../../../components/WorkingFranchise";
+import { NotWorkingFranchise } from "../../../components/NotWorkingFranchise";
 
 type ticket = {
   id: string;
@@ -54,12 +55,16 @@ export default function FranchiseDetail({ franchise, tickets }: FranchiseProps) 
 
             <Flex flexDirection="column" mr="8" ml="auto">
               <Text>Situação: {franchise.operational_status}</Text>
+              {franchise.operational_status !== 'Não iniciado' && 
               <Link href="/tickets/create?franchise_id=1050">
-              <Button colorScheme="yellow">Novo Ticket</Button>
-              </Link>
+                <Button colorScheme="yellow">Novo Ticket</Button>
+              </Link>}
             </Flex>
           </Flex>
-          <WorkingFranchise tickets={tickets}/>
+
+          {franchise.operational_status === 'Não iniciado' ?
+            <NotWorkingFranchise /> :
+            <WorkingFranchise tickets={tickets} />}
 
         </Flex>
 
@@ -84,8 +89,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const franchise = data
   const tickets = response.data
-
-  console.log(tickets)
 
   return {
     props: { franchise, tickets }
