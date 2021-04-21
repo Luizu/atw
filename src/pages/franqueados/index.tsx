@@ -31,7 +31,7 @@ export default function UserList() {
             </Heading>
 
             <Link href="/franqueados/create" passHref>
-              <Button as="a" size="sm" fontSize="sm" colorScheme="pink" leftIcon={<Icon as={RiAddLine} fontSize="20" />}>
+              <Button as="a" size="sm" fontSize="sm" colorScheme="yellow" leftIcon={<Icon as={RiAddLine} fontSize="20" />}>
                 Criar novo franqueado
             </Button>
             </Link>
@@ -55,7 +55,7 @@ export default function UserList() {
                     <Th>Usúario</Th>
                     {isWideVersion &&
                       <>
-                        <Th>Data de cadastro</Th>
+                        <Th>Franquia</Th>
                         <Th w="8"></Th>
                       </>
                     }
@@ -77,14 +77,14 @@ export default function UserList() {
                         {isWideVersion &&
                           <>
                             <Td>
-                              {user.createdAt}
+                              Unidade Vitória 1
                             </Td>
                             <Td>
                               <Button
                                 as="a"
                                 size="sm"
                                 fontSize="sm"
-                                colorScheme="purple"
+                                colorScheme="yellow"
                                 leftIcon={<Icon
                                   as={RiPencilLine}
                                   fontSize="16"

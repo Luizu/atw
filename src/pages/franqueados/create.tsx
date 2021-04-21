@@ -86,7 +86,7 @@ export default function CreateUser() {
       setLoading(false)
       return;
     } catch (err) {
-      alert(err)
+      console.log(err)
     }
 
   }, [])
