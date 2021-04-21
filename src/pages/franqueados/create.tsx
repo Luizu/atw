@@ -10,7 +10,6 @@ import { Input } from "../../components/Form/Input";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
-import { queryClient } from "../../services/mirage/queryClient";
 import { useRouter } from "next/router";
 
 type CreateUserFormData = {
@@ -40,8 +39,8 @@ const createUserFormSchema = yup.object().shape({
 
 export default function CreateUser() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [franchise, setFranchise] = useState<FranchiseProps | string>('');
+  const [loading, setLoading] = useState(true);
+  const [franchise, setFranchise] = useState<FranchiseProps>();
 
   const createUser = useMutation(async (user: CreateUserFormData) => {
     const newUser = {
@@ -52,27 +51,13 @@ export default function CreateUser() {
       password: user.password,
     }
 
-  const userResponse = await api.post('users', newUser)
+    const userResponse = await api.post('franchisee', newUser)
 
-  const franchiseResponse = await api.get(`franchise/${user.franchise}`)
+    const franchiseResponse = await api.get(`franchise/${user.franchise}`)
 
-  console.log(userResponse)
-  console.log(franchiseResponse)
-  
-  
-  
-    //   const response = await api.post('users', {
-  //     user: {
-  //       ...user,
-  //       created_at: new Date()
-  //     }
-  //   })
+    router.push('/franqueados')
+    return userResponse;
 
-  //   return response.data.user;
-  // }, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries('users');
-  //   }
   })
 
 
@@ -95,7 +80,7 @@ export default function CreateUser() {
       setLoading(false)
       return;
     } catch (err) {
-      if(err) setFranchise('Franquia não encontrada')
+      alert(err)
     }
 
   }, [])
@@ -156,7 +141,6 @@ export default function CreateUser() {
                 error={errors.franchise_location}
                 content={loading ? 'Carregando informações' : franchise.name}
                 label="Localização da franquia"
-                disabled="disabled"
                 {...register('franchise_location')}
               />
             </SimpleGrid>

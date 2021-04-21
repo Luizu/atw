@@ -1,4 +1,3 @@
-import { useCallback, useState } from "react";
 import { Box, Button, Divider, Flex, Heading, HStack, SimpleGrid, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -17,22 +16,20 @@ type CreateFranchiseFormData = {
   address: string;
 }
 
-interface FranchiseProps {
-  name: 'string';
-  address: 'string';
-}
-
 const createFranchiseFormSchema = yup.object().shape({
-  unit_name: yup.string().required('Nome obrigatório'),
-  address: yup.string().required('Estado obrigatório')
+  name: yup.string().required('Nome obrigatório'),
+  email: yup.string().required('Estado obrigatório')
 })
 
-export default function CreateUser() {
+export default function CreateNewFranchise() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const [franchise, setFranchise] = useState<FranchiseProps>();
+
+  const test = () => {
+    alert('works')
+  }
 
   const createFranchise = useMutation(async (franchise: CreateFranchiseFormData) => {
+    console.log('cheguei aqui')
     const newFranchise = {
       name: franchise.unit_name,
       address: franchise.address,
@@ -59,6 +56,7 @@ export default function CreateUser() {
     console.log(values)
     await createFranchise.mutateAsync(values)
 
+    router.push('/franquias')
   }
 
   return (
@@ -77,13 +75,13 @@ export default function CreateUser() {
             "8"]}
           onSubmit={handleSubmit(handleCreateFranchise)}
         >
-          <Heading size="lg" fontWeight="normal">Criar cadastro de franqueado</Heading>
+          <Heading size="lg" fontWeight="normal">Criar cadastro de franquia</Heading>
 
           <Divider my="6" borderColor="gray.700" />
 
           <VStack spacing="8">
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
-              <Input name="unit_name" error={errors.unit_name} label="Nome da unidade" {...register('unit_name')} />
+              <Input name="name" error={errors.unit_name} label="Nome da unidade" {...register('unit_name')} />
               <Input name="address" error={errors.address} label="Estado" {...register('address')} />
             </SimpleGrid>
 
@@ -91,12 +89,11 @@ export default function CreateUser() {
 
           <Flex mt="8" justify="flex-end">
             <HStack spacing="4">
-              <Link href="/users" passHref>
+              <Link href="/franquias" passHref>
                 <Button as="a" colorScheme="whiteAlpha">Cancelar</Button>
               </Link>
               <Button colorScheme="yellow" type="submit" isLoading={formState.isSubmitting}>Salvar</Button>
             </HStack>
-
           </Flex>
         </Box>
       </Flex>

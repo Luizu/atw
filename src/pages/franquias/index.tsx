@@ -6,11 +6,11 @@ import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
-import { useUsers } from "../../services/hooks/useUsers";
+import { useFranchises } from "../../services/hooks/useFranchise";
 
 export default function UserList() {
   const [page, setPage] = useState(1)
-  const { data, isLoading, isFetching, error } = useUsers();
+  const { data, isLoading, isFetching, error } = useFranchises();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -26,11 +26,11 @@ export default function UserList() {
 
         <Box flex="1" borderRadius={8} bg="gray.800" p="8">
           <Flex mb="8" justify="space-between" align="center">
-            <Heading size="lg" fontWeight="normal">Franquidas
+            <Heading size="lg" fontWeight="normal">Franquias
             {!isLoading && isFetching && <Spinner size="sm" color="gray.500" ml="4" />}
             </Heading>
 
-            <Link href="/users/create" passHref>
+            <Link href="/franquias/create" passHref>
               <Button as="a" size="sm" fontSize="sm" colorScheme="yellow" leftIcon={<Icon as={RiAddLine} fontSize="20" />}>
                 Criar nova franquia
             </Button>
@@ -62,22 +62,22 @@ export default function UserList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.users.map(user => {
+                  {data.franchises.map(franchise => {
                     return (
-                      <Tr key={user.id}>
+                      <Tr key={franchise.id}>
                         <Td px={["4", "4", "6"]}>
-                          <Text>{user.id}</Text>
+                          <Text>{franchise.id}</Text>
                         </Td>
                         <Td>
                           <Box>
-                            <Text fontWeight="bold">{user.name}</Text>
-                            <Text fontSize="small" color="gray.300">{user.email}</Text>
+                            <Text fontWeight="bold">{franchise.name}</Text>
+                            <Text fontSize="small" color="gray.300">{franchise.address}</Text>
                           </Box>
                         </Td>
                         {isWideVersion &&
                           <>
                             <Td>
-                              {user.createdAt}
+                              {franchise.owner}
                             </Td>
                             <Td>
                               <Button
