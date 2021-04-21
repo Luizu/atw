@@ -139,7 +139,7 @@ export default function CreateUser() {
 
           <Flex mt="8" justify="flex-end">
             <HStack spacing="4">
-              <Link href="/users" passHref>
+              <Link href="/tickets" passHref>
                 <Button as="a" colorScheme="whiteAlpha">Cancelar</Button>
               </Link>
               <Button colorScheme="yellow" type="submit" isLoading={formState.isSubmitting}>Salvar</Button>
