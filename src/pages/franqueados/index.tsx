@@ -85,7 +85,6 @@ export default function UserList() {
                                 size="sm"
                                 fontSize="sm"
                                 colorScheme="purple"
-                                onClick={() => alert('This action is not ready yet')}
                                 leftIcon={<Icon
                                   as={RiPencilLine}
                                   fontSize="16"
