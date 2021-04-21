@@ -83,8 +83,8 @@ export default function CreateUser() {
 
           <VStack spacing="8">
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
-              <Input name="unit_name" error={errors.unit_name} label="Nome da unidade" {...register('unit_name')} />
-              <Input name="address" error={errors.address} label="Estado" {...register('address')} />
+              <Input name="unit_name" error={errors.unit_name} placeholder="Unidade Vitória 1" label="Nome da unidade" {...register('unit_name')} />
+              <Input name="address" error={errors.address} placeholder="Espirito Santo" label="Estado" {...register('address')} />
             </SimpleGrid>
 
           </VStack>

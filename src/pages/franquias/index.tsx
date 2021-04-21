@@ -55,7 +55,7 @@ export default function UserList() {
                     <Th>Usúario</Th>
                     {isWideVersion &&
                       <>
-                        <Th>Endereço</Th>
+                        <Th>Franqueado</Th>
                         <Th w="8"></Th>
                       </>
                     }

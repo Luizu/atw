@@ -21,7 +21,7 @@ export async function getFranchises(): Promise<GetFranchisesResponse> {
     return {
       id: franchise.id,
       name: franchise.name,
-      address: franchise.address
+      owner: franchise.owner,
     }
   })
 
