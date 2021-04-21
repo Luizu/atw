@@ -35,13 +35,13 @@ const options = {
       color: theme.colors.gray[600]
     },
     categories: [
-      '2021-04-05T00:00:00.000Z',
-      '2021-04-06T00:00:00.000Z',
-      '2021-04-07T00:00:00.000Z',
-      '2021-04-08T00:00:00.000Z',
-      '2021-04-09T00:00:00.000Z',
-      '2021-04-10T00:00:00.000Z',
-      '2021-04-11T00:00:00.000Z',
+      '2021-01-01T00:00:00.000Z',
+      '2021-02-01T00:00:00.000Z',
+      '2021-03-01T00:00:00.000Z',
+      '2021-04-01T00:00:00.000Z',
+      '2021-05-01T00:00:00.000Z',
+      '2021-06-01T00:00:00.000Z',
+      '2021-07-01T00:00:00.000Z',
     ]
   },
   fill: {
@@ -56,7 +56,11 @@ const options = {
 };
 
 const series = [
-  { name: 'series1', data: [31, 120, 10, 28, 61, 18, 109] }
+  { name: 'series1', data: [15000, 12000, 3000, 28000, 10000, 50000, 10000] }
+]
+
+const series2 = [
+  { name: 'series1', data: [5, 1, 8, 10, 12, 3, 15] }
 ]
 
 export default function Dashboard() {
@@ -76,7 +80,7 @@ export default function Dashboard() {
 
           <Box p={["6", "8"]} bg="gray.800" borderRadius={8} pb="4">
             <Text fontSize="lg" mb="4">Taxa de abertura</Text>
-            <Chart options={options} series={series} type="area" height={160} />
+            <Chart options={options} series={series2} type="area" height={160} />
           </Box>
         </SimpleGrid>
       </Flex>
