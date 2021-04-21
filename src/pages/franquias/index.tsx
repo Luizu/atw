@@ -26,13 +26,13 @@ export default function UserList() {
 
         <Box flex="1" borderRadius={8} bg="gray.800" p="8">
           <Flex mb="8" justify="space-between" align="center">
-            <Heading size="lg" fontWeight="normal">Franqueados
+            <Heading size="lg" fontWeight="normal">Franquidas
             {!isLoading && isFetching && <Spinner size="sm" color="gray.500" ml="4" />}
             </Heading>
 
             <Link href="/users/create" passHref>
-              <Button as="a" size="sm" fontSize="sm" colorScheme="pink" leftIcon={<Icon as={RiAddLine} fontSize="20" />}>
-                Criar novo franqueado
+              <Button as="a" size="sm" fontSize="sm" colorScheme="yellow" leftIcon={<Icon as={RiAddLine} fontSize="20" />}>
+                Criar nova franquia
             </Button>
             </Link>
           </Flex>
@@ -42,7 +42,7 @@ export default function UserList() {
             </Flex>
           ) : error ? (
             <Flex>
-              <Text>Falha ao obter dados dos usuarios</Text>
+              <Text>Falha ao obter dados das franquias</Text>
             </ Flex>
           ) : (
             <>
@@ -50,12 +50,12 @@ export default function UserList() {
                 <Thead>
                   <Tr>
                     <Th px={["4", "4", "6"]} color="gray.300" w="8">
-                      <Checkbox colorScheme="pink" />
+                      Id
                     </Th>
                     <Th>Usúario</Th>
                     {isWideVersion &&
                       <>
-                        <Th>Data de cadastro</Th>
+                        <Th>Endereço</Th>
                         <Th w="8"></Th>
                       </>
                     }
@@ -66,7 +66,7 @@ export default function UserList() {
                     return (
                       <Tr key={user.id}>
                         <Td px={["4", "4", "6"]}>
-                          <Checkbox colorScheme="pink" />
+                          <Text>{user.id}</Text>
                         </Td>
                         <Td>
                           <Box>
@@ -84,14 +84,14 @@ export default function UserList() {
                                 as="a"
                                 size="sm"
                                 fontSize="sm"
-                                colorScheme="purple"
+                                colorScheme="yellow"
                                 onClick={() => alert('This action is not ready yet')}
                                 leftIcon={<Icon
                                   as={RiPencilLine}
                                   fontSize="16"
                                 />}
                               >
-                                Editar
+                                Acessar
                           </Button>
                             </Td>
                           </>

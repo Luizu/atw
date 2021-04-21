@@ -13,7 +13,7 @@ type GetUsersResponse = {
 }
 
 export async function getUsers(): Promise<GetUsersResponse> {
-  const { data } = await api.get('users');
+  const { data } = await api.get('franchisee');
 
   console.log(data)
 
@@ -31,7 +31,7 @@ export async function getUsers(): Promise<GetUsersResponse> {
 }
 
 export function useUsers() {
-  return useQuery(['users'], () => getUsers(), {
+  return useQuery(['franchisee'], () => getUsers(), {
     staleTime: 60000 // 1 minute
   })
 }

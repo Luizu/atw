@@ -13,7 +13,7 @@ import { api } from "../../services/api";
 import { queryClient } from "../../services/mirage/queryClient";
 import { useRouter } from "next/router";
 
-type CreateUserFormData = {
+type CreateFranchiseeFormData = {
   name: string;
   email: string;
   password: string;
@@ -29,7 +29,7 @@ interface FranchiseProps {
   address: 'string';
 }
 
-const createUserFormSchema = yup.object().shape({
+const createFranchiseeFormSchema = yup.object().shape({
   name: yup.string().required('Nome obrigatório'),
   email: yup.string().required('E-mail obrigatório').email('E-mail invalido'),
   password: yup.string().required('Senha obrigatória').min(6, 'No mínimo 6 caracteres'),
@@ -38,13 +38,13 @@ const createUserFormSchema = yup.object().shape({
   ], 'As senhas precisam ser iguais')
 })
 
-export default function CreateUser() {
+export default function CreateFranchisee() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [franchise, setFranchise] = useState<FranchiseProps | string>('');
 
-  const createUser = useMutation(async (user: CreateUserFormData) => {
-    const newUser = {
+  const createFranchisee = useMutation(async (user: CreateFranchiseeFormData) => {
+    const newFranchisee = {
       name: user.name,
       cpf: user.cpf,
       cnpj: user.cnpj,
@@ -52,7 +52,7 @@ export default function CreateUser() {
       password: user.password,
     }
 
-  const userResponse = await api.post('users', newUser)
+  const userResponse = await api.post('franchisee', newFranchisee)
 
   const franchiseResponse = await api.get(`franchise/${user.franchise}`)
 
@@ -77,7 +77,7 @@ export default function CreateUser() {
 
 
   const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(createUserFormSchema)
+    resolver: yupResolver(createFranchiseeFormSchema)
   })
 
   const errors = formState.errors
@@ -100,11 +100,11 @@ export default function CreateUser() {
 
   }, [])
 
-  const handleCreateUser: SubmitHandler<CreateUserFormData> = async (values) => {
+  const handleCreateFranchisee: SubmitHandler<CreateFranchiseeFormData> = async (values) => {
     console.log(values)
-    await createUser.mutateAsync(values)
+    await createFranchisee.mutateAsync(values)
 
-    // router.push('/users')
+      router.push('/franchisee')
   }
 
   return (
@@ -121,7 +121,7 @@ export default function CreateUser() {
           bg="gray.800"
           p={["6",
             "8"]}
-          onSubmit={handleSubmit(handleCreateUser)}
+          onSubmit={handleSubmit(handleCreateFranchisee)}
         >
           <Heading size="lg" fontWeight="normal">Criar cadastro de franqueado</Heading>
 
