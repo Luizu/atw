@@ -51,12 +51,20 @@ export default function CreateUser() {
       password: user.password,
     }
 
-    const userResponse = await api.post('franchisee', newUser)
+    const updatedFranchise = {
+      ...franchise,
+      owner: newUser.name,
+      operational_status: 'Adquirida'
+    }
 
-    const franchiseResponse = await api.get(`franchise/${user.franchise}`)
+    await api.post('franchisee', newUser)
+
+    await api.put(`franchise/${user.franchise}`, updatedFranchise)
+
+   
 
     router.push('/franqueados')
-    return userResponse;
+    return;
 
   })
 
@@ -73,8 +81,6 @@ export default function CreateUser() {
       setLoading(true)
 
       const response = await api.get(`franchise/${value}`)
-      console.log(response.status)
-
 
       setFranchise(response.data)
       setLoading(false)
@@ -88,8 +94,6 @@ export default function CreateUser() {
   const handleCreateUser: SubmitHandler<CreateUserFormData> = async (values) => {
     console.log(values)
     await createUser.mutateAsync(values)
-
-    // router.push('/users')
   }
 
   return (
