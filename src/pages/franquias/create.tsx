@@ -1,4 +1,3 @@
-import { useCallback, useState } from "react";
 import { Box, Button, Divider, Flex, Heading, HStack, SimpleGrid, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -17,10 +16,6 @@ type CreateFranchiseFormData = {
   address: string;
 }
 
-interface FranchiseProps {
-  name: 'string';
-  address: 'string';
-}
 
 const createFranchiseFormSchema = yup.object().shape({
   unit_name: yup.string().required('Nome obrigatório'),
@@ -29,8 +24,6 @@ const createFranchiseFormSchema = yup.object().shape({
 
 export default function CreateUser() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const [franchise, setFranchise] = useState<FranchiseProps>();
 
   const createFranchise = useMutation(async (franchise: CreateFranchiseFormData) => {
     const newFranchise = {
