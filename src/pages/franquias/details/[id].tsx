@@ -9,9 +9,16 @@ import { Sidebar } from "../../../components/Sidebar";
 import { FiArrowLeft } from 'react-icons/fi'
 import { WorkingFranchise } from "../../../components/WorkingFranchise";
 
+type ticket = {
+  id: string;
+  franchiseId: string;
+  title: string;
+  subject: string;
+  workplace_url: string;
+  status: string;
+}
 
-
-interface Franchise {
+type Franchise = {
   id: string;
   name: string;
   owner: string;
@@ -20,10 +27,11 @@ interface Franchise {
 }
 
 interface FranchiseProps {
-  franchise: Franchise
+  franchise: Franchise;
+  tickets: ticket[];
 }
 
-export default function FranchiseDetail({ franchise }: FranchiseProps) {
+export default function FranchiseDetail({ franchise, tickets }: FranchiseProps) {
   return (
     <Flex direction="column" h="100vh">
       <Header />
@@ -49,7 +57,7 @@ export default function FranchiseDetail({ franchise }: FranchiseProps) {
               <Button colorScheme="yellow">Novo Ticket</Button>
             </Flex>
           </Flex>
-          <WorkingFranchise />
+          <WorkingFranchise tickets={tickets}/>
 
         </Flex>
 
@@ -70,12 +78,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params
 
   const { data } = await api.get(`franchise/${id}`)
+  const response = await api.get(`franchise/${id}/tickets`)
 
   const franchise = data
+  const tickets = response.data
 
-  console.log(franchise)
+  console.log(tickets)
 
   return {
-    props: { franchise }
+    props: { franchise, tickets }
   }
 }
