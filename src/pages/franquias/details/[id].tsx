@@ -54,7 +54,9 @@ export default function FranchiseDetail({ franchise, tickets }: FranchiseProps) 
 
             <Flex flexDirection="column" mr="8" ml="auto">
               <Text>Situação: {franchise.operational_status}</Text>
+              <Link href="/tickets/create?franchise_id=1050">
               <Button colorScheme="yellow">Novo Ticket</Button>
+              </Link>
             </Flex>
           </Flex>
           <WorkingFranchise tickets={tickets}/>
